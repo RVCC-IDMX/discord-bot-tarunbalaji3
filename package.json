@@ -1,0 +1,20 @@
+{
+  "name": "discord-bot-tarunbalaji3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RVCC-IDMX/discord-bot-tarunbalaji3.git"
+  },
+  "keywords": [],
+  "author": "Tarun Balaji Ravi <tarunbalaji3@gmail.com> (https://github.com/tarunbalaji3)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RVCC-IDMX/discord-bot-tarunbalaji3/issues"
+  },
+  "homepage": "https://github.com/RVCC-IDMX/discord-bot-tarunbalaji3#readme"
+}
