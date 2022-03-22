@@ -6,9 +6,11 @@ let output: string = cowsay.say({
   text: 'Hello from typescript!',
   e: '^^',
   T: 'U ',
-  f: 'kitten',
+  r: true,
+  //f: 'mona-lisa',
 });
-// console.log(output);
+//console.log(output);
+//console.log(output.length);
 
 dotenv.config();
 
@@ -39,6 +41,14 @@ client.on('messageCreate', (message) => {
     \`\`\`
     `
       )
+      .catch(console.error);
+  }
+  if (message.content === 'cowsay' && output.length > 2000) {
+    message.react('🙁').then(console.log).catch(console.error);
+    message
+      .reply({
+        content: 'exceeding 2000 character limit',
+      })
       .catch(console.error);
   }
 });
