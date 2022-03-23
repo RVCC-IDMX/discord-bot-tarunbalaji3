@@ -2,13 +2,7 @@ import DiscordJS, { Intents } from 'discord.js';
 import dotenv from 'dotenv';
 import cowsay from './utils/cowsay';
 
-//const output = cowsay();
-//console.log(output);
-
 dotenv.config();
-
-//const PREFIX = process.env.PREFIX;
-//console.log(PREFIX);
 
 const client = new DiscordJS.Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
@@ -20,15 +14,15 @@ client.on('ready', () => {
 
 client.on('messageCreate', (message) => {
   const PREFIX = process.env.PREFIX || 'tbr!';
-  //console.log(PREFIX);
-  //console.log(PREFIX.length);
   const check = message.content;
   const bool = check.startsWith(PREFIX);
 
+  //Check if message starts with PREFIX, if not, exit
   if (bool != true) {
     return;
   }
 
+  //Parse Messages
   const args = message.content
     .toLowerCase()
     .substring(PREFIX.length)
@@ -37,11 +31,6 @@ client.on('messageCreate', (message) => {
     .split(/ /);
   const command = args.shift()!;
   const param = args.pop();
-
-  console.log(message.content);
-  console.log(param);
-  console.log(typeof param);
-  console.log(command);
 
   if (command === 'ping') {
     message.react('🤩').then(console.log).catch(console.error);
@@ -52,7 +41,7 @@ client.on('messageCreate', (message) => {
       .catch(console.error);
   }
   if (command === 'cowsay') {
-    //message.react('🐮').then(console.log).catch(console.error);
+    //Check if user gave proper image name
     try {
       cowsay(param);
     } catch (error) {
