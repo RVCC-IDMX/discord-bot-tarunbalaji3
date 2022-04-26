@@ -45,7 +45,12 @@ client.on('messageCreate', (message) => {
   const param = args.pop();
 
   if (command === 'ping') {
-    message.react('🤩').then(console.log).catch(console.error);
+    message
+      .react('🤩')
+      .then(() => {
+        console.log('react to ping');
+      })
+      .catch(console.error);
     message
       .reply({
         content: 'pong',
@@ -60,10 +65,10 @@ client.on('messageCreate', (message) => {
       console.log(error);
       return;
     }
-    message.react('🐮').then(console.log).catch(console.error);
+    message.react('🐮').then().catch(console.error);
     const output = cowsay(param);
     if (command === 'cowsay' && output.length > 2000) {
-      message.react('🙁').then(console.log).catch(console.error);
+      message.react('🙁').then().catch(console.error);
       message
         .reply({
           content: 'exceeding 2000 character limit',
