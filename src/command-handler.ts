@@ -37,20 +37,11 @@ export default (client: Client) => {
   client.on('messageCreate', (message) => {
     const CHANNELS = process.env.CHANNELS || null;
     const channels = CHANNELS.split(',');
-    // const pre = 'tbr!';
     if (!channels.includes(message.channel.id)) return;
     console.log(message.content);
     if (message.author.bot || !message.content.startsWith(PREFIX)) {
-      // console.log(message.content, message.author.bot);
       return;
     }
-    // console.log(message.content);
-    // const PREFIX = process.env.PREFIX || 'tbr!';
-    // const check = message.content;
-    // const bool = check.startsWith(PREFIX);
-    // if (bool != true) {
-    //   return;
-    // }
 
     const args = message.content.slice(PREFIX.length).split(/ +/);
     const commandName = args.shift()!.toLowerCase();
