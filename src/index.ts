@@ -20,71 +20,75 @@ const client = new DiscordJS.Client({
 
 client.on('ready', () => {
   console.log('The bot is ready');
+  let handler = require('./command-handler');
+  if (handler.default) handler = handler.default;
+
+  handler(client);
 });
 
-client.on('messageCreate', (message) => {
-  if (!channels.includes(message.channel.id)) return;
+// client.on('messageCreate', (message) => {
+//   if (!channels.includes(message.channel.id)) return;
 
-  const PREFIX = process.env.PREFIX || 'tbr!';
-  const check = message.content;
-  const bool = check.startsWith(PREFIX);
+//   const PREFIX = process.env.PREFIX || 'tbr!';
+//   const check = message.content;
+//   const bool = check.startsWith(PREFIX);
 
-  //Check if message starts with PREFIX, if not, exit
-  if (bool != true) {
-    return;
-  }
+//Check if message starts with PREFIX, if not, exit
+//   if (bool != true) {
+//     return;
+//   }
 
-  //Parse Messages
-  const args = message.content
-    .toLowerCase()
-    .substring(PREFIX.length)
-    .slice()
-    .trim()
-    .split(/ /);
-  const command = args.shift()!;
-  const param = args.pop();
+//Parse Messages
+//   const args = message.content
+//     .toLowerCase()
+//     .substring(PREFIX.length)
+//     .slice()
+//     .trim()
+//     .split(/ /);
+//   const command = args.shift()!;
+//   const param = args.pop();
 
-  if (command === 'ping') {
-    message
-      .react('🤩')
-      .then(() => {
-        console.log('react to ping');
-      })
-      .catch(console.error);
-    message
-      .reply({
-        content: 'pong',
-      })
-      .catch(console.error);
-  }
-  if (command === 'cowsay') {
-    //Check if user gave proper image name
-    try {
-      cowsay(param);
-    } catch (error) {
-      console.log(error);
-      return;
-    }
-    message.react('🐮').then().catch(console.error);
-    const output = cowsay(param);
-    if (command === 'cowsay' && output.length > 2000) {
-      message.react('🙁').then().catch(console.error);
-      message
-        .reply({
-          content: 'exceeding 2000 character limit',
-        })
-        .catch(console.error);
-    }
-    message
-      .reply(
-        `
-    \`\`\`
-    ${output}
-    \`\`\`
-    `
-      )
-      .catch(console.error);
-  }
-});
+//   if (command === 'ping') {
+//     message
+//       .react('🤩')
+//       .then(() => {
+//         console.log('react to ping');
+//       })
+//       .catch(console.error);
+//     message
+//       .reply({
+//         content: 'pong',
+//       })
+//       .catch(console.error);
+//   }
+//   if (command === 'cowsay') {
+//Check if user gave proper image name
+//     try {
+//       cowsay(param);
+//     } catch (error) {
+//       console.log(error);
+//       return;
+//     }
+//     message.react('🐮').then().catch(console.error);
+//     const output = cowsay(param);
+//     if (command === 'cowsay' && output.length > 2000) {
+//       message.react('🙁').then().catch(console.error);
+//       message
+//         .reply({
+//           content: 'exceeding 2000 character limit',
+//         })
+//         .catch(console.error);
+//     }
+//     message
+//       .reply(
+//         `
+//     \`\`\`
+//     ${output}
+//     \`\`\`
+//     `
+//       )
+//       .catch(console.error);
+//   }
+// });
 
 client.login(process.env.TOKEN);
