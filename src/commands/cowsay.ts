@@ -41,5 +41,6 @@ export default {
         )
         .catch(console.error);
     }
+    message.reply('pong');
   },
 };
